@@ -2,57 +2,157 @@
 <html>
 <head>
     <title>Market100 Screener</title>
+
     <style>
         body {
             font-family: Arial;
-            background: #111;
-            color: white;
-            text-align: center;
+            background: #f4f6f9;
+            margin: 0;
         }
-        h1 {
-            color: #00ffcc;
+
+        header {
+            background: white;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
         }
-        select, button {
+
+        .container {
+            padding: 20px;
+        }
+
+        .box {
+            background: #eaf3ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        input, select {
             padding: 10px;
-            margin: 10px;
             border-radius: 5px;
-            border: none;
+            border: 1px solid #ccc;
+            margin-right: 10px;
         }
+
         button {
-            background: #00ffcc;
+            padding: 10px 15px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-        ul {
-            list-style: none;
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        .filters {
+            margin-top: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            padding: 8px 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #f1f5f9;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
         }
     </style>
 </head>
+
 <body>
 
-<h1>📊 Market100 Screener</h1>
+<header>📊 Market100 Stock Screener</header>
 
-<select id="condition">
-    <option value="price_up">Price Up</option>
-    <option value="volume_high">High Volume</option>
-</select>
+<div class="container">
 
-<button onclick="runScanner()">Run Scan</button>
+    <div class="box">
+        <input type="text" id="search" placeholder="Scan stocks like 'price up 5%'">
+        <button onclick="addFilter()">Add Filter</button>
 
-<ul id="result"></ul>
+        <div class="filters" id="filters"></div>
+    </div>
+
+    <button onclick="runScan()">🚀 Run Scan</button>
+
+    <table id="resultTable">
+        <tr>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Change</th>
+        </tr>
+    </table>
+
+</div>
 
 <script>
-function runScanner() {
-    let result = document.getElementById("result");
-    result.innerHTML = "<li>🔍 Scanning...</li>";
 
-    setTimeout(() => {
-        result.innerHTML = `
-            <li>RELIANCE 📈</li>
-            <li>TCS 📊</li>
-            <li>INFY 💹</li>
-        `;
-    }, 1000);
+let filters = [];
+
+function addFilter() {
+    let val = document.getElementById("search").value;
+    if(val === "") return;
+
+    filters.push(val);
+
+    let div = document.getElementById("filters");
+    div.innerHTML += `<span class="tag">${val}</span>`;
+
+    document.getElementById("search").value = "";
 }
+
+function runScan() {
+    let table = document.getElementById("resultTable");
+
+    table.innerHTML = `
+        <tr>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Change</th>
+        </tr>
+    `;
+
+    // Dummy data (baad me real API lagega)
+    let stocks = [
+        {name:"RELIANCE", price:2500, change:"+2%"},
+        {name:"TCS", price:3500, change:"+1.5%"},
+        {name:"INFY", price:1500, change:"+3%"}
+    ];
+
+    stocks.forEach(s => {
+        table.innerHTML += `
+            <tr>
+                <td>${s.name}</td>
+                <td>${s.price}</td>
+                <td>${s.change}</td>
+            </tr>
+        `;
+    });
+}
+
 </script>
 
 </body>
