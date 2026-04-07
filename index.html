@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Screener</title>
+    <title>Market100 Screener</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+        h1 {
+            color: #00ffcc;
+        }
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: #00ffcc;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+        }
+    </style>
 </head>
 <body>
 
-<h2>📊 Stock Screener</h2>
+<h1>📊 Market100 Screener</h1>
 
 <select id="condition">
     <option value="price_up">Price Up</option>
@@ -19,13 +43,13 @@
 <script>
 function runScanner() {
     let result = document.getElementById("result");
-    result.innerHTML = "<li>Scanning...</li>";
+    result.innerHTML = "<li>🔍 Scanning...</li>";
 
     setTimeout(() => {
         result.innerHTML = `
-            <li>RELIANCE</li>
-            <li>TCS</li>
-            <li>INFY</li>
+            <li>RELIANCE 📈</li>
+            <li>TCS 📊</li>
+            <li>INFY 💹</li>
         `;
     }, 1000);
 }
