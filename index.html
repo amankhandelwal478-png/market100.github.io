@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Screener</title>
+</head>
+<body>
+
+<h2>📊 Stock Screener</h2>
+
+<select id="condition">
+    <option value="price_up">Price Up</option>
+    <option value="volume_high">High Volume</option>
+</select>
+
+<button onclick="runScanner()">Run Scan</button>
+
+<ul id="result"></ul>
+
+<script>
+function runScanner() {
+    let result = document.getElementById("result");
+    result.innerHTML = "<li>Scanning...</li>";
+
+    setTimeout(() => {
+        result.innerHTML = `
+            <li>RELIANCE</li>
+            <li>TCS</li>
+            <li>INFY</li>
+        `;
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
